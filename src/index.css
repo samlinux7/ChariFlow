@@ -1,68 +1,31 @@
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+  /* Background and text */
+  --bg-color: #f9f9f9;            /* Light neutral background */
+  --text-color: #1a1a1a;          /* Primary text color */
+  --muted-text-color: #666666;    /* Secondary/less important text */
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  /* Primary theme colors */
+  --primary-color: #4CAF50;       /* Primary action color (green - donate buttons) */
+  --primary-hover: #45a049;       /* Slightly darker on hover */
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  /* Accent and highlights */
+  --accent-color: #FF9800;        /* Warm accent (e.g., for badges, labels) */
+  --accent-hover: #fb8c00;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  /* Header and footer */
+  --header-color: #2E7D32;        /* Darker green for nav bars or headers */
+  --footer-bg: #e8f5e9;           /* Light greenish footer */
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  /* Buttons */
+  --button-bg: var(--primary-color);
+  --button-hover-bg: var(--primary-hover);
+  --button-text-color: #ffffff;
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
+  /* Links */
+  --link-color: #1976D2;          /* Clickable link blue */
+  --link-hover-color: #1565C0;
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+  /* Cards and containers */
+  --card-bg: #ffffff;             /* Background for cards/containers */
+  --card-border: #e0e0e0;         /* Subtle borders */
 }
