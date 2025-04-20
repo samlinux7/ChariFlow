@@ -205,7 +205,21 @@
   font-size: 1.2rem;
   margin-right: 0.5rem;
 }
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  color: #666;
+}
 
+.signup-link {
+  color: #4CAF50; /* Or your preferred color */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signup-link:hover {
+  text-decoration: underline;
+}
 .form-footer {
   text-align: center;
   margin-top: 1.5rem;

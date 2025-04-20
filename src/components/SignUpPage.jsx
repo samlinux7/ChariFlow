@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useFormik } from "formik";
 import * as yup from "yup";
 import '../index.css';
-
+import { Link } from "react-router-dom";
 function SignUpPage() {
   const [formData, setFormData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -225,9 +225,9 @@ function SignUpPage() {
           </div>
         )}
 
-        <p className="form-footer">
-          Already have an account? <a href="/login" className="login-link">Log in</a>
-        </p>
+<p className="form-footer">
+  Already have an account? <Link to="/Login" className="login-link">Log in</Link>
+</p>
       </form>
     </div>
   );
