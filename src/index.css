@@ -29,3 +29,8 @@
   --card-bg: #ffffff;             /* Background for cards/containers */
   --card-border: #e0e0e0;         /* Subtle borders */
 }
+
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
