@@ -1,22 +1,30 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import SignUpPage from './components/SignUpPage';  // Fixed path
-import LoginPage from './components/Login';       // Fixed path
-import './App.css';
+import { Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage/HomePage.jsx';
+import AboutUsPage from './pages/AboutUsPage/AboutUsPage.jsx';
+import Contact from './pages/ContactPage/Contact.jsx';
+import SuccessStories from './pages/SuccessStoriesPage/SuccessStories.jsx';
+import SignUpPage from './components/SignUpPage';
+import LoginPage from './components/Login';
+import LayoutWithNav from './components/LayoutWithNav.jsx';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-        {/* Add a default route if needed */}
-        <Route path="/" element={<LoginPage />} />  {/* Or your homepage component */}
-        
-        <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/login" element={<LoginPage />} />
-        
-        {/* Optional: Add a 404 route for undefined paths */}
-        <Route path="*" element={<div>404 Not Found</div>} />
-      </Routes>
-    </Router>
+    <Routes>
+      {/* Public/auth routes without navbar */}
+      <Route path="/" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+
+      {/* Routes wrapped with navbar */}
+      <Route element={<LayoutWithNav />}>
+        <Route path="/home" element={<HomePage />} />
+        <Route path="/about" element={<AboutUsPage />} />
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/success-stories" element={<SuccessStories />} />
+      </Route>
+
+      {/* Catch-all 404 */}
+      <Route path="*" element={<div>404 Not Found</div>} />
+    </Routes>
   );
 }
 
