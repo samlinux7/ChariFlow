@@ -1,21 +1,52 @@
 // DonateSomethingElse.jsx
-const DonateSomethingElse = () => {
-  const donation = {
-    id: 1,
-    title: 'Need Books for Students',
-    city: 'Sukkur City',
-    desc: 'Help provide essential school books for Grade 5 students from low-income families.',
-    category: 'Education',
-    image: 'https://images.pexels.com/photos/256517/pexels-photo-256517.jpeg'
+import { useState } from 'react';
+
+const DonateSomethingElse = ({ onBack }) => {
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [city, setCity] = useState('');
+  const [category, setCategory] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // You can handle form submission here
+    console.log({ title, description, city, category });
   };
 
   return (
     <div className="custom-donation">
-      <h2>{donation.title}</h2>
-      <p><strong>City:</strong> {donation.city}</p>
-      <p><strong>Description:</strong> {donation.desc}</p>
-      <p><strong>Category:</strong> {donation.category}</p>
-      <img src={donation.image} alt={donation.title} />
+      <h2>Custom Donation</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          placeholder="What are you donating?"
+          required
+        />
+        <input
+          type="text"
+          value={city}
+          onChange={(e) => setCity(e.target.value)}
+          placeholder="City"
+          required
+        />
+        <textarea
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder="Description"
+          required
+        />
+        <input
+          type="text"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          placeholder="Category"
+          required
+        />
+        <button type="submit">Submit Donation</button>
+        <button type="button" onClick={onBack}>Back</button>
+      </form>
     </div>
   );
 };
