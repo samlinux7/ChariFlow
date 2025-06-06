@@ -6,23 +6,26 @@ import SuccessStories from './pages/SuccessStoriesPage/SuccessStories.jsx';
 import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/Login';
 import LayoutWithNav from './components/LayoutWithNav.jsx';
+import DonationPage from './pages/DonationPage/DonationPage.jsx'; // <-- make sure this exists
 
 function App() {
   return (
     <Routes>
-      {/* Public/auth routes without navbar */}
-      <Route path="/" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-
-      {/* Routes wrapped with navbar */}
+      {/* Temporarily start from HomePage instead of Login */}
       <Route element={<LayoutWithNav />}>
+        <Route path="/" element={<HomePage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/about" element={<AboutUsPage />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/success-stories" element={<SuccessStories />} />
+        <Route path="/donate" element={<DonationPage />} />
       </Route>
 
-      {/* Catch-all 404 */}
+      {/* Auth routes if needed later */}
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/signup" element={<SignUpPage />} />
+
+      {/* Catch-all */}
       <Route path="*" element={<div>404 Not Found</div>} />
     </Routes>
   );
