@@ -1,4 +1,4 @@
-// src/components/LayoutWithNav.jsx
+
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import NavigationBar from './NavigationBar/NavigationBar.jsx';

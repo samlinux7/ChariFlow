@@ -6,7 +6,7 @@ import SuccessStories from './pages/SuccessStoriesPage/SuccessStories.jsx';
 import SignUpPage from './components/SignUpPage';
 import LoginPage from './components/Login';
 import LayoutWithNav from './components/LayoutWithNav.jsx';
-import DonationPage from './pages/DonationPage/DonationPage.jsx'; // <-- make sure this exists
+import DonationPage from './pages/DonorPage/DonorPage.jsx'; // <-- make sure this exists
 
 function App() {
   return (
