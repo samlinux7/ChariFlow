@@ -5,9 +5,10 @@ import AboutUsPage from './pages/AboutUsPage/AboutUsPage.jsx';
 import Contact from './pages/ContactPage/Contact.jsx';
 import SuccessStories from './pages/SuccessStoriesPage/SuccessStories.jsx';
 
+
+
 function App() {
   return (
-   
       <>
         <NavigationBar />
         <Routes>
@@ -17,7 +18,6 @@ function App() {
           <Route path="/success-stories" element={<SuccessStories />} />
         </Routes>
       </>
-
   )
 }
 

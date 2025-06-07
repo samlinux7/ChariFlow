@@ -1,10 +1,9 @@
-import NavigationBar from "../../components/NavigationBar/NavigationBar.jsx";
+import Intro from './HomePageComponents/Intro.jsx'
 function HomePage() {
   return (
     <>
       <div className="home-page">
-        <h1>Welcome to the Home Page</h1>
-        <p>This is the content of the home page.</p>
+        <Intro />
       </div>
     </>
   );
