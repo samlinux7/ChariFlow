@@ -1,8 +1,10 @@
 import { Calendar, MapPin, Tag } from 'lucide-react';
 import './DonationCard.css';  // Import the CSS file
+import { Link } from 'react-router-dom';
 
 const DonationCard = ({ request }) => {
-  const { title, city, desc, image, category, date } = request;
+ const { id, title, city, desc, image, category, date } = request;
+
 
   return (
     <div className="donation-card">
@@ -34,9 +36,7 @@ const DonationCard = ({ request }) => {
 
         <p className="donation-card-description">{desc}</p>
 
-        <button className="donation-card-button">
-          Support This Cause
-        </button>
+<Link to={`/requests/${request.id}`}>Support This</Link>
       </div>
     </div>
   );
