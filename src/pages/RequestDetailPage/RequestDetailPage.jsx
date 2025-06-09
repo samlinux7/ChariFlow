@@ -2,12 +2,12 @@ import { useParams, Link } from 'react-router-dom';
 import { useContext } from 'react';
 import { ArrowLeft, Calendar, MapPin, Tag, Heart, Share2, Users, Target } from 'lucide-react';
 import DonationForm from '../../components/DonationForm';
-import { RequestsContext } from '../../context/RequestsContext'; // adjust path as needed
+import { useRequests } from '../../context/RequestsContext'; // adjust path as needed
 import './RequestDetailPage.css';
 
 const RequestDetailPage = () => {
   const { id } = useParams();
-  const { requests } = useContext(RequestsContext); // get requests from context
+  const { requests } = useRequests(); // get requests from context
   const request = requests.find(req => req.id === parseInt(id));
   const progressPercentage = request ? (request.raised / request.goal) * 100 : 0;
 

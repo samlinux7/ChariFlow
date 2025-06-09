@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
 import DonationCard from './DonationCard';
-import { RequestsContext } from '../context/RequestsContext'; // adjust path as needed
+import { useRequests} from '../context/RequestsContext'; // adjust path as needed
 
 const RequestFeed = () => {
-  const { requests } = useContext(RequestsContext);
+  const { requests } = useRequests();
+
 
   return (
     <div>

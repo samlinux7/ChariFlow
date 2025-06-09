@@ -1,10 +1,13 @@
 import { Calendar, MapPin, Tag } from 'lucide-react';
-import './DonationCard.css';  // Import the CSS file
+import './DonationCard.css';
 import { Link } from 'react-router-dom';
+import { useUserRole } from '../context/UserRoleContext';
+
+
 
 const DonationCard = ({ request }) => {
- const { id, title, city, desc, image, category, date } = request;
-
+  const { id, title, city, desc, image, category, date } = request;
+  const { role } = useUserRole();
 
   return (
     <div className="donation-card">
@@ -36,7 +39,9 @@ const DonationCard = ({ request }) => {
 
         <p className="donation-card-description">{desc}</p>
 
-<Link to={`/requests/${request.id}`}>Support This</Link>
+        <Link to={`/requests/${request.id}`}>
+          {role === 'donor' ? 'Support this cause' : 'Request for this donation'}
+        </Link>
       </div>
     </div>
   );

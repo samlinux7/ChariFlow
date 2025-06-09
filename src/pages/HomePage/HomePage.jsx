@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
+import { useUserRole } from '../../context/UserRoleContext';
 
 function HomePage() {
   const navigate = useNavigate();
+  const { setRole } = useUserRole();
 
   return (
     <div style={styles.container}>
@@ -9,8 +11,19 @@ function HomePage() {
       <p style={styles.subheading}>
         A platform to give and receive with dignity. Help others or ask for help.
       </p>
-      <button onClick={() => navigate('/donate')} style={styles.button}>
-        Go to Donation Page
+
+      <button onClick={() => {
+        setRole('donor');
+        navigate('/donate');
+      }} style={styles.button}>
+        I Want to Donate
+      </button>
+
+      <button onClick={() => {
+        setRole('taker');
+        navigate('/donate');
+      }} style={styles.button}>
+        I Need a Donation
       </button>
     </div>
   );
@@ -31,17 +44,22 @@ const styles = {
   subheading: {
     fontSize: '1.2rem',
     color: '#555',
-    marginBottom: '2rem',
+    marginBottom: '2.5rem',
+  },
+  buttonGroup: {
+    display: 'flex',
+    justifyContent: 'center',
+    gap: '1.5rem',
+    flexWrap: 'wrap',
   },
   button: {
-    padding: '12px 24px',
+    padding: '14px 30px',
     fontSize: '16px',
-    backgroundColor: '#6c63ff',
     color: '#fff',
     border: 'none',
     borderRadius: '8px',
     cursor: 'pointer',
-    transition: 'all 0.3s',
+    transition: 'background-color 0.3s ease',
   },
 };
 
