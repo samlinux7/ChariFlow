@@ -5,7 +5,7 @@ import { useDonations } from '../context/DonationsContext';
 import { useNavigate } from 'react-router-dom';
 
 const DonateSomethingElse = ({ onBack }) => {
-  const { role } = useUserRole();
+  const { role, userId } = useUserRole();
   const { requests, addRequest } = useRequests();
   const { addDonation } = useDonations();
   const navigate = useNavigate();
@@ -99,7 +99,8 @@ const DonateSomethingElse = ({ onBack }) => {
         organizerRole,
         raised: 0,
         supporters: 0,
-        accounts, // attach online donation accounts
+        accounts, 
+         takerId: userId,
       };
 
       localStorage.setItem('pendingRequest', JSON.stringify(newRequest));

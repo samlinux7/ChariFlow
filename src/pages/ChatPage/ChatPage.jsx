@@ -1,13 +1,14 @@
-// pages/ChatPage.jsx
 import { useParams } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { useRequests } from '../../context/RequestsContext.jsx';
 import { useChat } from '../../context/ChatContext.jsx';
+import { useUserRole } from '../../context/UserRoleContext.jsx';
 import './ChatPage.css';
 
 const ChatPage = () => {
   const { requestId } = useParams();
   const { requests } = useRequests();
+  const { role, userId } = useUserRole(); // ✅ Grab user info
   const { messagesByRequest, sendMessage } = useChat();
   const [input, setInput] = useState('');
   const [file, setFile] = useState(null);
@@ -19,7 +20,7 @@ const ChatPage = () => {
   const handleSend = () => {
     if (!input.trim() && !file) return;
     const newMsg = {
-      role: 'Donor',
+      role,
       text: input,
       timestamp: new Date().toLocaleString(),
       file: file ? URL.createObjectURL(file) : null,
@@ -33,13 +34,14 @@ const ChatPage = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  if (!request) {
+  if (!request) return <div>Request not found.</div>;
+
+  // ✅ Access Control Logic
+  if (role === 'taker' && userId !== request.takerId) {
     return (
-      <div className="chat-container">
-        <div className="chat-request-header">
-          <h2>Request Not Found</h2>
-          <p>The request you're trying to access does not exist.</p>
-        </div>
+      <div className="unauthorized">
+        <h2>Access Denied</h2>
+        <p>You are not authorized to view this chat.</p>
       </div>
     );
   }
@@ -48,7 +50,7 @@ const ChatPage = () => {
     <div className="chat-container">
       <div className="chat-request-header">
         <h2>{request.title}</h2>
-        <p>{request?.description?.slice(0, 100) || "No description available"}...</p>
+        <p>{request.desc.slice(0, 100)}...</p>
         <p className="chat-request-meta">City: {request.city}</p>
       </div>
 

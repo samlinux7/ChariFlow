@@ -1,10 +1,12 @@
 import { useState } from 'react';
-import { useRequests } from '../../context/RequestsContext'; // adjust path
-import './VolunteerPage.css';  // basic CSS import
+import { useNavigate } from 'react-router-dom';
+import { useRequests } from '../../context/RequestsContext';
+import './VolunteerPage.css';
 
 const VolunteerDashboard = () => {
   const { verificationRequests, approveRequest, rejectRequest } = useRequests();
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleApprove = (id) => {
     const success = approveRequest(id);
@@ -24,6 +26,10 @@ const VolunteerDashboard = () => {
       setError('');
       alert('Request rejected!');
     }
+  };
+
+  const handleJoinChat = (id) => {
+    navigate(`/chat/${id}`);
   };
 
   if (!verificationRequests || verificationRequests.length === 0) {
@@ -63,6 +69,8 @@ const VolunteerDashboard = () => {
           <div className="buttons">
             <button onClick={() => handleApprove(req.id)}>Approve</button>
             <button onClick={() => handleReject(req.id)}>Reject</button>
+            {/* Chat Access */}
+            <button onClick={() => handleJoinChat(req.id)}>Join Chat</button>
           </div>
         </div>
       ))}
