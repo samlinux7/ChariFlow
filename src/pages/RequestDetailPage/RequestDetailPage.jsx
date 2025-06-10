@@ -1,5 +1,5 @@
-import { useParams, Link } from 'react-router-dom';
-import { useContext } from 'react';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useContext, useState } from 'react';
 import { ArrowLeft, Calendar, MapPin, Tag, Heart, Share2, Users, Target } from 'lucide-react';
 import DonationForm from '../../components/DonationForm';
 import { useRequests } from '../../context/RequestsContext'; // adjust path as needed
@@ -10,6 +10,13 @@ const RequestDetailPage = () => {
   const { requests } = useRequests(); // get requests from context
   const request = requests.find(req => req.id === parseInt(id));
   const progressPercentage = request ? (request.raised / request.goal) * 100 : 0;
+
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+
+  const handleStartChat = () => {
+    navigate(`/chat/${id}`);
+  };
 
   if (!request) {
     return (
@@ -94,6 +101,25 @@ const RequestDetailPage = () => {
           {/* RIGHT SIDEBAR */}
           <div className="right-section">
             <DonationForm />
+
+            <div className="item-donate-section">
+              <button className="item-donate-btn" onClick={() => setShowModal(true)}>
+                I have an item to donate
+              </button>
+            </div>
+
+            {showModal && (
+              <div className="modal-overlay">
+                <div className="modal-box">
+                  <h3>Start a Chat?</h3>
+                  <p>This will start a chat with the requestor and a volunteer. Do you want to continue?</p>
+                  <div className="modal-buttons">
+                    <button onClick={handleStartChat}>Yes, Start Chat</button>
+                    <button onClick={() => setShowModal(false)}>Cancel</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
