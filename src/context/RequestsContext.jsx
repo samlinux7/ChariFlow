@@ -19,9 +19,16 @@ export const RequestsProvider = ({ children }) => {
       organizerRole: "School Principal",
       urgency: "High",
       beneficiaries: "40 Grade 5 students",
-      timeline: "Books needed by next month"
+      timeline: "Books needed by next month",
+      accounts: [
+        {
+          platform: "JazzCash",
+          accountNumber: "03001234567",
+          accountHolderName: "Sarah Johnson"
+        }
+      ]
     },
-    // ... add your other initial requests here ...
+    // Add more requests if needed
   ]);
 
   const addRequest = (newRequest) => {
@@ -40,5 +47,5 @@ export const RequestsProvider = ({ children }) => {
   );
 };
 
-// Custom hook for easy access to RequestsContext
+// Custom hook
 export const useRequests = () => useContext(RequestsContext);

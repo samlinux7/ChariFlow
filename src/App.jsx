@@ -1,5 +1,6 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
+import VerifyRequest from './pages/VerifyRequest/VerifyRequest';
 
 import HomePage from './pages/HomePage/HomePage.jsx';
 import AboutUsPage from './pages/AboutUsPage/AboutUsPage.jsx';
@@ -10,15 +11,17 @@ import LoginPage from './components/Login.jsx';
 import LayoutWithNav from './components/LayoutWithNav.jsx';
 import DonationPage from './pages/DonorPage/DonorPage.jsx';
 import RequestDetailPage from './pages/RequestDetailPage/RequestDetailPage.jsx';
-
+import VolunteerDashboard from './pages/VolunteerPage/VolunteerPage.jsx';
+import ChatPage from './pages/ChatPage/ChatPage.jsx';
 import { RequestsProvider } from './context/RequestsContext.jsx';
 import { UserRoleProvider } from './context/UserRoleContext.jsx';
 import { DonationsProvider } from './context/DonationsContext.jsx'; // ✅ Added import
-
+import { ChatProvider } from './context/ChatContext';
 function App() {
   return (
     <UserRoleProvider>
       <RequestsProvider>
+        <ChatProvider>
         <DonationsProvider> {/* ✅ Added wrapper */}
           <Routes>
             <Route element={<LayoutWithNav />}>
@@ -29,6 +32,10 @@ function App() {
               <Route path="/success-stories" element={<SuccessStories />} />
               <Route path="/donate" element={<DonationPage />} />
               <Route path="/requests/:id" element={<RequestDetailPage />} />
+              <Route path="/verify-request" element={<VerifyRequest />} /> 
+               <Route path="/volunteer" element={<VolunteerDashboard />} />
+              <Route path="/chat/:requestId" element={<ChatPage />} />
+            
             </Route>
 
             <Route path="/login" element={<LoginPage />} />
@@ -36,6 +43,7 @@ function App() {
             <Route path="*" element={<div>404 Not Found</div>} />
           </Routes>
         </DonationsProvider>
+        </ChatProvider>
       </RequestsProvider>
     </UserRoleProvider>
   );

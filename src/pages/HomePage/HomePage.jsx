@@ -25,6 +25,13 @@ function HomePage() {
       }} style={styles.button}>
         I Need a Donation
       </button>
+
+      {/* ✅ Volunteer Dashboard Button */}
+      <button onClick={() => {
+        navigate('/volunteer');
+      }} style={{ ...styles.button, backgroundColor: '#6c63ff', marginTop: '20px' }}>
+        Volunteer Dashboard
+      </button>
     </div>
   );
 }
@@ -46,20 +53,16 @@ const styles = {
     color: '#555',
     marginBottom: '2.5rem',
   },
-  buttonGroup: {
-    display: 'flex',
-    justifyContent: 'center',
-    gap: '1.5rem',
-    flexWrap: 'wrap',
-  },
   button: {
     padding: '14px 30px',
     fontSize: '16px',
     color: '#fff',
+    backgroundColor: '#007bff',
     border: 'none',
     borderRadius: '8px',
     cursor: 'pointer',
     transition: 'background-color 0.3s ease',
+    margin: '10px',
   },
 };
 
