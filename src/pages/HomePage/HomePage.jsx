@@ -1,11 +1,6 @@
 import Intro from './HomePageComponents/Intro.jsx'
 function HomePage() {
   return (
-<<<<<<< HEAD
-    <>
-      <div className="home-page">
-        <Intro />
-=======
     <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1740&q=80")' }}>
       {/* Overlay */}
       <div className="absolute inset-0 bg-black bg-opacity-60"></div>
@@ -52,9 +47,8 @@ function HomePage() {
             </button>
           </div>
         </div>
->>>>>>> 08a248f (Updated UI for whole website)
       </div>
-    </>
+    </div>
   );
 }
 

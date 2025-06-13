@@ -2,15 +2,6 @@ import './NavigationBar.css';
 import { Link } from 'react-router-dom';
 function NavigationBar() {
     return (
-<<<<<<< HEAD
-        <ul className="navigation-bar">
-            <li><Link to='/'>Home</Link></li>
-            <li><Link to='/about'>About Us</Link></li>
-            <li><Link to='/contact'>Contact</Link></li>
-            <li><Link to='/success-stories'>Success Stories</Link></li>
-        </ul>
-    )
-=======
         <nav className="bg-white shadow-md fixed top-0 left-0 right-0 z-50">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
@@ -62,7 +53,6 @@ function NavigationBar() {
             )}
         </nav>
     );
->>>>>>> 08a248f (Updated UI for whole website)
 }
 
 export default NavigationBar;
