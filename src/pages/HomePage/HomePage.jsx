@@ -1,5 +1,10 @@
-import Intro from './HomePageComponents/Intro.jsx'
+import { useNavigate } from 'react-router-dom';
+import { useUserRole } from '../../context/UserRoleContext';
+
 function HomePage() {
+  const navigate = useNavigate();
+  const { setRole } = useUserRole();
+
   return (
     <div className="relative min-h-screen bg-cover bg-center" style={{ backgroundImage: 'url("https://images.unsplash.com/photo-1543269865-cbf427effbad?auto=format&fit=crop&w=1740&q=80")' }}>
       {/* Overlay */}
