@@ -48,7 +48,7 @@ function Login() {
         }
 
         // Store the token (you might want to use more secure storage in production)
-        login({ token: data.token });
+        login({ token: data.token, userId: data.userId });
         
         setSubmitSuccess(true);
         resetForm();
