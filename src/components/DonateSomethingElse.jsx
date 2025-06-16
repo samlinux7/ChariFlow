@@ -328,7 +328,7 @@ const DonateSomethingElse = ({ onBack }) => {
                     takerId: userId,
                   };
 
-                  fetch("http://localhost:3000/api/donations/request", {
+                  fetch("http://localhost:3000/api/requests", {
                     method: "POST",
                     headers: {
                       "Content-Type": "application/json",
