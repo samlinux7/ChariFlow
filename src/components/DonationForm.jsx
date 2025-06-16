@@ -107,6 +107,39 @@ const DonationForm = ({ onCustomDonationClick, onInteract, availableDonations })
 
       <div className="flex flex-col gap-3">
         <button
+          onClick={() => {
+            if (amount) {
+              // Call the api
+              fetch('/api/donations/', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  userId: localStorage.getItem('userId'), 
+                  amount: parseFloat(amount),
+                  message,
+                }),
+              })
+                .then((response) => response.json())
+                .then((data) => {
+                  if (data.success) {
+                    alert('Donation successful!');
+                    setAmount('');
+                    setMessage('');
+                  } else {
+                    alert('Donation failed. Please try again.');
+                  }
+                })
+                .catch((error) => {
+                  console.error('Error:', error);
+                  alert('An error occurred. Please try again later.');
+                }); 
+
+            } else {
+              alert('Please enter a donation amount.');
+            }
+          }}
           type="button"
           className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"
         >
