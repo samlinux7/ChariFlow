@@ -15,6 +15,7 @@ const DonationForm = ({
   onCustomDonationClick,
   onInteract,
   availableDonations,
+  requestId = null // If this is None means it's a normal donation but if we pass id then it means the donation is to support a case.  
 }) => {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
@@ -112,7 +113,10 @@ const DonationForm = ({
       <div className="flex flex-col gap-3">
         <button
           onClick={() => {
-            if (amount) {
+
+            // This first check is because the form is used in two places so we have to check if the form is used for normal donation or for supporting a case
+            if (!requestId) {
+               if (amount) {
               let authUser =  JSON.parse(localStorage.getItem("authUser"))
               let token = authUser.token;
               
@@ -150,6 +154,49 @@ const DonationForm = ({
             } else {
               alert("Please enter a donation amount.");
             }
+            }
+            
+            // Means we are supporting a case
+            else {
+              if (amount) {
+                let authUser = JSON.parse(localStorage.getItem("authUser"));
+                let token = authUser.token;
+                let userId = authUser.userId;
+                // Call the api with requestId
+                console.log("Request ID: ", requestId);
+                fetch("http://localhost:3000/api/donations/", {
+                  method: "POST",
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                  },
+                  body: JSON.stringify({
+                    userId: userId,
+                    amount: parseFloat(amount),
+                    message,
+                    requestId: requestId, // include requestId
+                  }),
+                })
+                  .then((data) => {
+                    console.log(data);
+                    if (data.status == 201) {
+                      alert("Donation successful!");
+                      setAmount("");
+                      setMessage("");
+                    } else {
+                      alert("Donation failed. Please try again.");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again later.");
+                  });
+              } else {
+                alert("Please enter a donation amount.");
+              }
+            }
+
+
           }}
           type="button"
           className="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition"

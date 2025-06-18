@@ -113,7 +113,7 @@ const DonateSomethingElse = ({ onBack }) => {
         organizer,
         organizerRole,
         raised: 0,
-        supporters: 0,
+        supporters: [],
         accounts,
         takerId: userId,
       };
@@ -323,7 +323,7 @@ const DonateSomethingElse = ({ onBack }) => {
                     organizer,
                     organizerRole,
                     raised: 0,
-                    supporters: 0,
+                    supporters: [],
                     accounts,
                     takerId: userId,
                   };

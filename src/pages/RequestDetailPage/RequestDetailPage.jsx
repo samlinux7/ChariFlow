@@ -6,12 +6,15 @@ import {
 } from 'lucide-react';
 import DonationForm from '../../components/DonationForm';
 import { useRequests } from '../../context/RequestsContext'; // adjust path as needed
+import React from 'react';
 
 const RequestDetailPage = () => {
   const { id } = useParams();
   const { requests } = useRequests(); // get requests from context
   const request = requests.find(req => req.id === parseInt(id));
   const progressPercentage = request ? (request.raised / request.goal) * 100 : 0;
+  const [view, setView] = useState('default'); // 'default' | 'donationForm' | 'somethingElse'
+
 
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -59,7 +62,7 @@ const RequestDetailPage = () => {
                 <div className="flex gap-6 text-gray-400 text-sm mb-5">
                   <span className="flex items-center gap-1"><MapPin size={16} /> {request.city}</span>
                   <span className="flex items-center gap-1"><Calendar size={16} /> Posted today</span>
-                  <span className="flex items-center gap-1"><Users size={16} /> {request.supporters} supporters</span>
+                  <span className="flex items-center gap-1"><Users size={16} /> {Array.isArray(request.supporters) ? request.supporters.length : 0} supporters</span>
                 </div>
 
                 {/* PROGRESS */}
@@ -112,7 +115,11 @@ const RequestDetailPage = () => {
 
           {/* RIGHT SIDEBAR */}
           <div className="flex-1 min-w-[30%] space-y-6">
-            <DonationForm />
+            <DonationForm
+              requestId={request.id}
+              onCustomDonationClick={() => setView('somethingElse')}
+              onInteract={() => setView('donationForm')}
+            />
 
             <div className="mt-6">
               <button
