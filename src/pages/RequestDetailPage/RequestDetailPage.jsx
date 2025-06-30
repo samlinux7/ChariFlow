@@ -1,20 +1,27 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { useContext, useState } from "react";
 import {
-  ArrowLeft, Calendar, MapPin, Tag,
-  Heart, Share2, Users, Target
-} from 'lucide-react';
-import DonationForm from '../../components/DonationForm';
-import { useRequests } from '../../context/RequestsContext'; // adjust path as needed
-import React from 'react';
+  ArrowLeft,
+  Calendar,
+  MapPin,
+  Tag,
+  Heart,
+  Share2,
+  Users,
+  Target,
+} from "lucide-react";
+import DonationForm from "../../components/DonationForm";
+import { useRequests } from "../../context/RequestsContext"; // adjust path as needed
+import React from "react";
 
 const RequestDetailPage = () => {
   const { id } = useParams();
   const { requests } = useRequests(); // get requests from context
-  const request = requests.find(req => req.id === parseInt(id));
-  const progressPercentage = request ? (request.raised / request.goal) * 100 : 0;
-  const [view, setView] = useState('default'); // 'default' | 'donationForm' | 'somethingElse'
-
+  const request = requests.find((req) => req.id === parseInt(id));
+  const progressPercentage = request
+    ? (request.raised / request.goal) * 100
+    : 0;
+  const [view, setView] = useState("default"); // 'default' | 'donationForm' | 'somethingElse'
 
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -37,7 +44,10 @@ const RequestDetailPage = () => {
   return (
     <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white min-h-screen py-16 px-4">
       <div className="max-w-6xl mx-auto">
-        <Link to="/donate" className="inline-flex items-center gap-2 mb-6 text-purple-400 font-bold">
+        <Link
+          to="/donate"
+          className="inline-flex items-center gap-2 mb-6 text-purple-400 font-bold"
+        >
           <ArrowLeft size={16} /> Back to Donations
         </Link>
 
@@ -45,24 +55,45 @@ const RequestDetailPage = () => {
           {/* LEFT SECTION */}
           <div className="flex-1 min-w-[60%] flex flex-col gap-6">
             <div className="bg-slate-800 rounded-xl shadow-lg overflow-hidden">
-              <img src={request.image} alt={request.title} className="w-full h-72 object-cover" />
+              <img
+                src={request.image}
+                alt={request.title}
+                className="w-full h-72 object-cover"
+              />
               <div className="p-6">
                 <div className="flex items-center gap-3 mb-3">
                   <Tag size={16} />
-                  <span className="text-sm font-semibold text-purple-300">{request.category}</span>
+                  <span className="text-sm font-semibold text-purple-300">
+                    {request.category}
+                  </span>
                   <span
                     className={`ml-auto px-3 py-1 rounded-full text-xs font-semibold
-                      ${request.urgency?.toLowerCase() === 'critical' ? 'bg-red-900 text-red-100'
-                      : request.urgency?.toLowerCase() === 'high' ? 'bg-yellow-900 text-yellow-100'
-                      : 'bg-emerald-900 text-emerald-100'}`}>
+                      ${
+                        request.urgency?.toLowerCase() === "critical"
+                          ? "bg-red-900 text-red-100"
+                          : request.urgency?.toLowerCase() === "high"
+                          ? "bg-yellow-900 text-yellow-100"
+                          : "bg-emerald-900 text-emerald-100"
+                      }`}
+                  >
                     {request.urgency} Priority
                   </span>
                 </div>
                 <h1 className="text-2xl font-bold mb-3">{request.title}</h1>
                 <div className="flex gap-6 text-gray-400 text-sm mb-5">
-                  <span className="flex items-center gap-1"><MapPin size={16} /> {request.city}</span>
-                  <span className="flex items-center gap-1"><Calendar size={16} /> Posted today</span>
-                  <span className="flex items-center gap-1"><Users size={16} /> {Array.isArray(request.supporters) ? request.supporters.length : 0} supporters</span>
+                  <span className="flex items-center gap-1">
+                    <MapPin size={16} /> {request.city}
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Calendar size={16} /> Posted today
+                  </span>
+                  <span className="flex items-center gap-1">
+                    <Users size={16} />{" "}
+                    {Array.isArray(request.supporters)
+                      ? request.supporters.length
+                      : 0}{" "}
+                    supporters
+                  </span>
                 </div>
 
                 {/* PROGRESS */}
@@ -77,7 +108,9 @@ const RequestDetailPage = () => {
                       style={{ width: `${Math.min(progressPercentage, 100)}%` }}
                     ></div>
                   </div>
-                  <div className="text-sm text-gray-300 mt-2">{progressPercentage.toFixed(0)}% funded</div>
+                  <div className="text-sm text-gray-300 mt-2">
+                    {progressPercentage.toFixed(0)}% funded
+                  </div>
                 </div>
               </div>
             </div>
@@ -88,15 +121,21 @@ const RequestDetailPage = () => {
               <p className="mb-6">{request.fullDescription}</p>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
-                  <h4 className="font-semibold flex items-center gap-2"><Target size={16} /> Beneficiaries</h4>
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <Target size={16} /> Beneficiaries
+                  </h4>
                   <p>{request.beneficiaries}</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold flex items-center gap-2"><Calendar size={16} /> Timeline</h4>
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <Calendar size={16} /> Timeline
+                  </h4>
                   <p>{request.timeline}</p>
                 </div>
                 <div>
-                  <h4 className="font-semibold flex items-center gap-2"><Heart size={16} /> Organizer</h4>
+                  <h4 className="font-semibold flex items-center gap-2">
+                    <Heart size={16} /> Organizer
+                  </h4>
                   <p>{request.organizer}</p>
                   <small>{request.organizerRole}</small>
                 </div>
@@ -106,7 +145,10 @@ const RequestDetailPage = () => {
             {/* SHARE */}
             <div className="bg-slate-800 rounded-xl p-6 shadow-lg">
               <h3 className="text-lg font-bold mb-2">Help Spread the Word</h3>
-              <p className="mb-4">Share this request with your friends and family to help us reach our goal faster.</p>
+              <p className="mb-4">
+                Share this request with your friends and family to help us reach
+                our goal faster.
+              </p>
               <button className="inline-flex items-center gap-2 bg-gradient-to-r from-pink-500 to-purple-500 text-white font-bold px-4 py-2 rounded-md">
                 <Share2 size={16} /> Share This Request
               </button>
@@ -117,14 +159,15 @@ const RequestDetailPage = () => {
           <div className="flex-1 min-w-[30%] space-y-6">
             <DonationForm
               requestId={request.id}
-              onCustomDonationClick={() => setView('somethingElse')}
-              onInteract={() => setView('donationForm')}
+              onCustomDonationClick={() => setView("somethingElse")}
+              onInteract={() => setView("donationForm")}
             />
 
             <div className="mt-6">
               <button
                 onClick={() => setShowModal(true)}
-                className="bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded">
+                className="bg-blue-600 w-full text-white font-semibold py-2 px-4 rounded"
+              >
                 I have an item to donate
               </button>
             </div>
@@ -133,7 +176,10 @@ const RequestDetailPage = () => {
               <div className="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center z-50">
                 <div className="bg-white text-black p-6 rounded-md max-w-md w-full text-center">
                   <h3 className="text-lg font-bold mb-2">Start a Chat?</h3>
-                  <p>This will start a chat with the requestor and a volunteer. Do you want to continue?</p>
+                  <p>
+                    This will start a chat with the requestor and a volunteer.
+                    Do you want to continue?
+                  </p>
                   <div className="flex justify-center gap-4 mt-4">
                     <button
                       onClick={handleStartChat}

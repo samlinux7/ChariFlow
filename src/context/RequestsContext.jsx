@@ -10,7 +10,7 @@ export const RequestsProvider = ({ children }) => {
   useEffect(() => {
     const fetchRequests = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/requests'); // Adjust URL as needed
+        const response = await fetch('http://localhost:3000/api/requests'); 
         const data = await response.json();
         if (response.ok) {
           setRequests(data);
