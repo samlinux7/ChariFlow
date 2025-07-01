@@ -1,4 +1,4 @@
-import DonationForDonorCard from "../../../components/DonationForDonorCard";
+import DonationForDonorCard from "../../../components/DonorComponents/DonationForDonorCard";
 import { useDonations } from "../../../context/DonationsContext";
 import { useEffect } from "react";
 

@@ -1,6 +1,6 @@
-import { Calendar, MapPin, Tag } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { useUserRole } from '../context/UserRoleContext';
+import { Calendar, MapPin, Tag } from "lucide-react";
+import { Link } from "react-router-dom";
+import { useUserRole } from "../../context/UserRoleContext";
 
 const DonationCard = ({ request }) => {
   const { id, title, city, desc, image, category, date } = request;
@@ -11,7 +11,10 @@ const DonationCard = ({ request }) => {
       {/* Image */}
       <div className="h-48 overflow-hidden group">
         <img
-          src={image || "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"}
+          src={
+            image ||
+            "https://images.pexels.com/photos/3943716/pexels-photo-3943716.jpeg"
+          }
           alt={title}
           className="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"
         />
@@ -48,7 +51,7 @@ const DonationCard = ({ request }) => {
           to={`/requests/${id}`}
           className="block w-full text-center bg-gradient-to-r from-pink-500 to-purple-600 text-white font-medium py-2 rounded-lg hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
         >
-          {role === 'donor' ? 'Support this cause' : 'Request for this donation'}
+          Support this cause
         </Link>
       </div>
     </div>
