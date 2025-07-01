@@ -19,6 +19,7 @@ import { DonationsProvider } from "./context/DonationsContext.jsx";
 import { ChatProvider } from "./context/ChatContext";
 import AcceptorPage from "./pages/DonationPages/AcceptorPage/AccpetorPage.jsx";
 import DonorPage from "./pages/DonationPages/DonorPage/DonorPage.jsx";
+import AdminLogin from "./pages/Admin/AdminLogin";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
               <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/admin" element={<AdminLogin />} />
 
                 {/* Protected Routes */}
                 <Route

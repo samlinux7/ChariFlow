@@ -58,6 +58,19 @@ function HomePage() {
               Volunteer Dashboard
             </button>
           </div>
+
+          {/* Logout Button */}
+          <div className="pt-6">
+            <button
+              onClick={() => {
+                localStorage.clear();
+                window.location.reload();
+              }}
+              className="px-8 py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-full shadow-md hover:shadow-xl hover:scale-105 transition transform duration-300"
+            >
+              Logout
+            </button>
+          </div>
         </div>
       </div>
     </div>
