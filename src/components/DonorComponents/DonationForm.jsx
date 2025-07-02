@@ -117,14 +117,6 @@ const DonationForm = ({
         >
           Share with Friends
         </button>
-
-        <button
-          type="button"
-          onClick={onCustomDonationClick}
-          className="text-blue-600 underline hover:text-blue-800 transition"
-        >
-          I want to donate something else
-        </button>
       </div>
     </div>
   );
