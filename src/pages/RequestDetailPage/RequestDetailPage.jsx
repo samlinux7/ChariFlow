@@ -1,5 +1,6 @@
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
+import donationImage from "../../assets/donation.webp";
 import {
   ArrowLeft,
   Calendar,
@@ -56,7 +57,7 @@ const RequestDetailPage = () => {
           <div className="flex-1 min-w-[60%] flex flex-col gap-6">
             <div className="bg-slate-800 rounded-xl shadow-lg overflow-hidden">
               <img
-                src={request.image}
+                src={donationImage}
                 alt={request.title}
                 className="w-full h-72 object-cover"
               />

@@ -49,16 +49,6 @@ function HomePage() {
             </button>
           </div>
 
-          {/* Volunteer Button */}
-          <div className="pt-6">
-            <button
-              onClick={() => navigate("/volunteer")}
-              className="px-8 py-3 bg-indigo-500 hover:bg-indigo-600 text-white font-semibold rounded-full shadow-md hover:shadow-xl hover:scale-105 transition transform duration-300"
-            >
-              Volunteer Dashboard
-            </button>
-          </div>
-
           {/* Logout Button */}
           <div className="pt-6">
             <button
