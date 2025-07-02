@@ -30,7 +30,7 @@ const DonationForDonorCard = ({ donation }) => {
       if (!response.ok)
         throw new Error(data.message || "Failed to assign donation");
       alert("Donation reqeusted!");
-      // Optionally, you may want to refresh the parent list or trigger a re-fetch here
+      window.location.reload();
     } catch (err) {
       alert(err.message || "An error occurred while assigning the donation.");
     }
