@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,11 +22,11 @@ const AdminLogin = () => {
         }
       );
       const data = await response.json();
-      if (!response.status === 200) {
+      if (response.status !== 200) {
         throw new Error(data.message || "Invalid username or password");
       }
       alert("Login successful!");
-      // Redirect or set admin session here
+      navigate("/adminpage");
     } catch (err) {
       setError(err.message || "Invalid username or password");
     } finally {

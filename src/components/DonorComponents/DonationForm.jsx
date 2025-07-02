@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserRole } from "../../context/UserRoleContext"; // adjust path as needed
 import { useDonations } from "../../context/DonationsContext";
@@ -14,54 +14,22 @@ const DonationCard = ({ donation }) => (
 
 const DonationForm = ({
   onCustomDonationClick,
-  onInteract,
   availableDonations,
   requestId = null, // If this is None means it's a normal donation but if we pass id then it means the donation is to support a case.
 }) => {
   const [amount, setAmount] = useState("");
   const [message, setMessage] = useState("");
-  const [hasInteracted, setHasInteracted] = useState(false);
   const presetAmounts = [10, 25, 50, 100];
 
   const navigate = useNavigate();
-  const { role, setRole } = useUserRole();
+  const { setRole } = useUserRole();
   const { addDonation } = useDonations();
-
-  useEffect(() => {
-    if (!hasInteracted && (amount || message)) {
-      onInteract();
-      setHasInteracted(true);
-    }
-  }, [amount, message, onInteract, hasInteracted]);
 
   const handleBack = () => {
     setRole(null);
     navigate("/");
   };
 
-  // If user is a taker
-  if (role === "taker") {
-    return (
-      <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
-        <button
-          onClick={handleBack}
-          className="mb-4 text-blue-600 hover:underline flex items-center"
-        >
-          ← Back
-        </button>
-
-        <button
-          type="button"
-          onClick={onCustomDonationClick}
-          className="w-full bg-blue-600 text-white py-2 px-4 rounded hover:bg-blue-700 transition"
-        >
-          I want to request something else
-        </button>
-      </div>
-    );
-  }
-
-  // If user is a donor
   return (
     <div className="max-w-xl mx-auto p-6 bg-white rounded-lg shadow-md mt-6">
       <button
