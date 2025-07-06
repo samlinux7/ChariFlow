@@ -36,6 +36,8 @@ const RequestSomethingElseForm = ({ onBack }) => {
   ]);
   const [error, setError] = useState("");
 
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
+
   const generateUniqueId = () => Date.now() + Math.floor(Math.random() * 1000);
 
   const handleAccountChange = (index, field, value) => {
@@ -83,7 +85,7 @@ const RequestSomethingElseForm = ({ onBack }) => {
       takerId: userId,
     };
 
-    fetch("http://localhost:3000/api/requests", {
+    fetch(`${apiBaseUrl}/api/requests`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(requestData),

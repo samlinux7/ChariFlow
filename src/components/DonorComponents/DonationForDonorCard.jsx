@@ -1,8 +1,9 @@
 // components/DonationCard.jsx
-import React from "react";
+import React, { useState } from "react";
 import charityImage from "../../assets/charity.png";
 
-const DonationForDonorCard = ({ donation }) => {
+function DonationForDonorCard({ donation }) {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
   const { user, amount, message, appliedUsers = [] } = donation;
   const authUser = JSON.parse(localStorage.getItem("authUser"));
   const myId = authUser?.userId || authUser?._id;
@@ -17,7 +18,7 @@ const DonationForDonorCard = ({ donation }) => {
       const donationId = donation._id;
 
       const response = await fetch(
-        "http://localhost:3000/api/requests/assign-donation",
+        `${apiBaseUrl}/api/requests/assign-donation`,
         {
           method: "POST",
           headers: {
@@ -63,6 +64,6 @@ const DonationForDonorCard = ({ donation }) => {
       )}
     </div>
   );
-};
+}
 
 export default DonationForDonorCard;

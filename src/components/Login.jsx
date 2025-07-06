@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 function Login() {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -31,7 +32,9 @@ function Login() {
       setErrorMessage(""); // Clear previous errors
 
       try {
-        const response = await fetch("http://localhost:3000/api/auth/login", {
+        const url = `${apiBaseUrl}/api/auth/login`;
+        console.log("Url: ", url);
+        const response = await fetch(url, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

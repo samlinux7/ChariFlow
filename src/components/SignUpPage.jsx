@@ -6,6 +6,8 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 
 function SignUpPage() {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
+
   const [formData, setFormData] = useState([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -50,7 +52,7 @@ function SignUpPage() {
           city: values.City,
         };
 
-        const response = await fetch("http://localhost:3000/api/auth/signup", {
+        const response = await fetch(`${apiBaseUrl}/api/auth/signup`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

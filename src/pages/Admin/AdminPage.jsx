@@ -2,13 +2,14 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const AdminPage = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
   const [requests, setRequests] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchRequests = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3000/api/requests/assigned-donations?status=pending"
+        `${apiBaseUrl}/api/requests/assigned-donations?status=pending`
       );
       const requestsWithDetails = await Promise.all(
         res.data.map(async (req) => {
@@ -16,7 +17,7 @@ const AdminPage = () => {
           let receiver = null;
           try {
             const userRes = await axios.get(
-              `http://localhost:3000/api/user/${req.receiverId}`
+              `${apiBaseUrl}/api/user/${req.receiverId}`
             );
             receiver = userRes.data;
           } catch (e) {
@@ -26,7 +27,7 @@ const AdminPage = () => {
           let donation = null;
           try {
             const donationRes = await axios.get(
-              `http://localhost:3000/api/donations/${req.donationId}`
+              `${apiBaseUrl}/api/donations/${req.donationId}`
             );
             donation = donationRes.data;
           } catch (e) {
@@ -45,7 +46,7 @@ const AdminPage = () => {
 
   const handleAccept = async (id) => {
     try {
-      await axios.post("http://localhost:3000/api/requests/accept-request", {
+      await axios.post(`${apiBaseUrl}/api/requests/accept-request`, {
         requestId: id,
       });
       setRequests((prev) => prev.filter((req) => req._id !== id)); // remove from list
@@ -56,7 +57,7 @@ const AdminPage = () => {
 
   const handleReject = async (id) => {
     try {
-      await axios.post("http://localhost:3000/api/requests/reject-request", {
+      await axios.post(`${apiBaseUrl}/api/requests/reject-request`, {
         requestId: id,
       });
       setRequests((prev) => prev.filter((req) => req._id !== id)); // remove from list

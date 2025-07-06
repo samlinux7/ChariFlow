@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+
 const DonationsContext = createContext();
 
 export const DonationsProvider = ({ children }) => {
@@ -6,17 +7,16 @@ export const DonationsProvider = ({ children }) => {
 
   // Fetch donations from backend with a configurable limit
   const fetchDonations = async (token, limit = 15) => {
+    const apiBaseUrl = import.meta.env.VITE_API_BASE; // ✅ moved here
     try {
-      const res = await fetch(
-        `http://localhost:3000/api/donations/?limit=${limit}`,
-        {
-          headers: {
-            Authorization: token ? `Bearer ${token}` : undefined,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await fetch(`${apiBaseUrl}/api/donations/?limit=${limit}`, {
+        headers: {
+          Authorization: token ? `Bearer ${token}` : undefined,
+          "Content-Type": "application/json",
+        },
+      });
       if (res.ok) {
+        console.log("Response from donations API:", res);
         const data = await res.json();
         setDonations(data);
       } else {
@@ -29,8 +29,9 @@ export const DonationsProvider = ({ children }) => {
   };
 
   const addDonation = async ({ userId, amount, message, requestId, token }) => {
+    const apiBaseUrl = import.meta.env.VITE_API_BASE; // ✅ moved here too
     try {
-      const res = await fetch("http://localhost:3000/api/donations/", {
+      const res = await fetch(`${apiBaseUrl}/api/donations/`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -47,8 +48,6 @@ export const DonationsProvider = ({ children }) => {
       if (res.status === 201) {
         const newDonation = await res.json();
         setDonations((prev) => [...prev, newDonation]);
-        // Optionally refresh all donations from backend
-        // await fetchDonations(token);
         return { success: true, message: "Donation successful!" };
       } else {
         return {
@@ -65,7 +64,6 @@ export const DonationsProvider = ({ children }) => {
     }
   };
 
-  // Fetch all donations on mount (if needed, pass token from storage)
   useEffect(() => {
     const authUser = JSON.parse(localStorage.getItem("authUser"));
     const token = authUser?.token;
@@ -81,5 +79,4 @@ export const DonationsProvider = ({ children }) => {
   );
 };
 
-// Custom hook to use DonationsContext
 export const useDonations = () => useContext(DonationsContext);

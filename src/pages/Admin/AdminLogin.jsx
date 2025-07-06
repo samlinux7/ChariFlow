@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const AdminLogin = () => {
+  const apiBaseUrl = import.meta.env.VITE_API_BASE;
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -13,14 +14,11 @@ const AdminLogin = () => {
     setIsSubmitting(true);
     setError("");
     try {
-      const response = await fetch(
-        "http://localhost:3000/api/auth/admin/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ username, password }),
-        }
-      );
+      const response = await fetch(`${apiBaseUrl}/api/auth/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ username, password }),
+      });
       const data = await response.json();
       if (response.status !== 200) {
         throw new Error(data.message || "Invalid username or password");
